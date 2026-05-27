@@ -1,0 +1,67 @@
+# =============================================================================
+# docker/compose.yaml
+# Long-term ROS2 Humble development container.
+# 路径基准为 docker/ 目录，因此 ../ 指向项目根。
+# 变量来源：项目根目录的 .env 文件（compose 会自动加载同级 .env，
+#           因为 compose 文件在 docker/ 下，这里通过 env_file 显式指向）。
+# =============================================================================
+services:
+  ros2:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: ${IMAGE_NAME:-ros2_humble_dev:latest}
+    container_name: ${CONTAINER_NAME:-ros2_humble_dev}
+
+    # ROS2 DDS 通信最稳的方式：host 网络 + host IPC
+    network_mode: host
+    ipc: host
+
+    # 设备访问 / GUI 等需要较高权限
+    privileged: true
+
+    # 交互式 bash
+    stdin_open: true
+    tty: true
+
+    working_dir: /workspace/ros2_ws
+
+    env_file:
+      - ../.env
+
+    environment:
+      # X11 / GUI
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=${XAUTHORITY:-/root/.Xauthority}
+      # ROS2
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
+      - RMW_IMPLEMENTATION=${RMW_IMPLEMENTATION:-rmw_fastrtps_cpp}
+      # locale
+      - LANG=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+
+    volumes:
+      # X11 socket，rviz2 / rqt GUI 需要
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # USB / 串口 / CAN / 摄像头：直接挂 /dev 最省事
+      - /dev:/dev
+      # 时区一致
+      - /etc/localtime:/etc/localtime:ro
+      # 工作区：项目根/ros2_ws -> 容器 /workspace/ros2_ws
+      - ../ros2_ws:/workspace/ros2_ws
+      # 数据目录
+      - ../data:/workspace/data
+      # {{EXTRA_VOLUMES}}
+
+    # 设备组（host network + privileged 时通常已足够，这里是兜底）
+    group_add:
+      - dialout   # 串口
+      - plugdev   # USB
+      - video     # 摄像头
+
+    # 重启策略：开发环境用 unless-stopped 比较稳
+    restart: unless-stopped
+
+    entrypoint: ["/entrypoint.sh"]
+    command: ["bash"]

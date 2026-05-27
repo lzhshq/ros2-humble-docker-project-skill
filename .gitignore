@@ -1,0 +1,11 @@
+# 仓库自身的开发产物（不影响生成项目里的 .gitignore）
+*.bak_*
+*.swp
+*.swo
+*~
+.DS_Store
+__pycache__/
+
+# 防止误把测试生成的临时项目提交（开发本 skill 时可能在仓库里跑 new）
+test_robot/
+my_robot_project/
