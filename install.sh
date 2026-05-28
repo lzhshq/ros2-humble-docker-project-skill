@@ -34,6 +34,7 @@
 #   SKILL_TARBALL_URL   Tarball URL used when git is unavailable
 #                       Default: https://codeload.github.com/lzhshq/ros2-humble-docker-project-skill/tar.gz/$SKILL_REF
 #   SKILL_FORCE         "1" to force re-download (delete existing install dir first)
+#   SKILL_SKIP_DOCKER_CHECK  "1" to skip the post-install Docker presence check
 # =============================================================================
 
 set -euo pipefail
@@ -196,6 +197,37 @@ verify_install() {
     chmod +x "$SKILL_INSTALL_DIR/scripts/init_ros2_humble_docker.sh" 2>/dev/null || true
 }
 
+# ---------- 5) docker presence check (non-blocking) ----------
+check_docker() {
+    if [ "${SKILL_SKIP_DOCKER_CHECK:-0}" = "1" ]; then
+        return 0
+    fi
+
+    local has_docker=0 has_compose=0
+    command -v docker >/dev/null 2>&1 && has_docker=1
+    if [ "$has_docker" = "1" ]; then
+        docker compose version >/dev/null 2>&1 && has_compose=1
+    fi
+
+    echo
+    if [ "$has_docker" = "1" ] && [ "$has_compose" = "1" ]; then
+        log "Docker 检查: $(docker --version 2>/dev/null | head -n1)"
+        log "          $(docker compose version 2>/dev/null | head -n1)"
+        if ! docker info >/dev/null 2>&1; then
+            warn "docker info 失败 -> 你的用户可能不在 docker 组。修复:"
+            warn "  sudo usermod -aG docker \$USER && newgrp docker"
+        fi
+        return 0
+    fi
+
+    warn "未检测到 Docker (skill 已装好, 但 ./scripts/build.sh 之后会失败)"
+    warn "请在跑 build.sh 之前装好 Docker:"
+    warn "  Linux:           curl -fsSL https://get.docker.com | sh"
+    warn "                   sudo usermod -aG docker \$USER && newgrp docker"
+    warn "  macOS / Windows: 装 Docker Desktop (https://www.docker.com/products/docker-desktop)"
+    warn "如想跳过此检查: SKILL_SKIP_DOCKER_CHECK=1 重新跑 install.sh"
+}
+
 # ---------- main ----------
 main() {
     log "安装 skill: $SKILL_NAME"
@@ -218,6 +250,8 @@ main() {
         [ -z "$d" ] && continue
         link_into "$d"
     done <<< "$targets"
+
+    check_docker
 
     echo
     printf "%b===========================================================%b\n" "$C_GREEN" "$C_RESET"
