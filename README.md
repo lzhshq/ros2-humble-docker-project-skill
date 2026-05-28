@@ -41,6 +41,19 @@
 curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/install.sh | bash
 ```
 
+**国内网络备用**（GitHub raw 不稳时）：
+
+```bash
+curl -fsSL https://cdn.jsdelivr.net/gh/lzhshq/ros2-humble-docker-project-skill@main/install.sh | bash
+```
+
+如果连 `git clone github.com` 都挂，再加一层镜像：
+
+```bash
+curl -fsSL https://cdn.jsdelivr.net/gh/lzhshq/ros2-humble-docker-project-skill@main/install.sh | \
+    SKILL_REPO=https://ghproxy.com/https://github.com/lzhshq/ros2-humble-docker-project-skill.git bash
+```
+
 安装脚本做的事：
 
 1. clone 仓库到 `~/.local/share/agent-skills/ros2-humble-docker-project`

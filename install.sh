@@ -7,6 +7,12 @@
 #   # Recommended (no git needed on the user's machine):
 #   curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/install.sh | bash
 #
+#   # If GitHub is unstable for you (e.g., from China mainland), try jsDelivr:
+#   curl -fsSL https://cdn.jsdelivr.net/gh/lzhshq/ros2-humble-docker-project-skill@main/install.sh | bash
+#   # …and if `git clone github.com` is also blocked, override the repo URL:
+#   curl -fsSL https://cdn.jsdelivr.net/gh/lzhshq/ros2-humble-docker-project-skill@main/install.sh | \
+#       SKILL_REPO=https://ghproxy.com/https://github.com/lzhshq/ros2-humble-docker-project-skill.git bash
+#
 #   # Explicit branch / tag:
 #   curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/install.sh \
 #       | SKILL_REF=main bash
