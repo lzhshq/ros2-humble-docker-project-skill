@@ -5,10 +5,10 @@
 # Usage (any of these):
 #
 #   # Recommended (no git needed on the user's machine):
-#   curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/install.sh | bash
 #
 #   # Explicit branch / tag:
-#   curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh \
+#   curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/install.sh \
 #       | SKILL_REF=main bash
 #
 #   # If you've already cloned the repo locally:
@@ -24,9 +24,9 @@
 #                       If none exist, ~/.kiro/skills is created.
 #   SKILL_REF           Git ref / branch / tag (default: main)
 #   SKILL_REPO          Git repo URL (override only if you fork it)
-#                       Default: https://github.com/lzhshq/ros2-humble-docker-project-skill-.git
+#                       Default: https://github.com/lzhshq/ros2-humble-docker-project-skill.git
 #   SKILL_TARBALL_URL   Tarball URL used when git is unavailable
-#                       Default: https://codeload.github.com/lzhshq/ros2-humble-docker-project-skill-/tar.gz/$SKILL_REF
+#                       Default: https://codeload.github.com/lzhshq/ros2-humble-docker-project-skill/tar.gz/$SKILL_REF
 #   SKILL_FORCE         "1" to force re-download (delete existing install dir first)
 # =============================================================================
 
@@ -34,10 +34,10 @@ set -euo pipefail
 
 # ---------- defaults ----------
 SKILL_NAME="ros2-humble-docker-project"
-SKILL_REPO_DEFAULT="https://github.com/lzhshq/ros2-humble-docker-project-skill-.git"
+SKILL_REPO_DEFAULT="https://github.com/lzhshq/ros2-humble-docker-project-skill.git"
 SKILL_REF="${SKILL_REF:-main}"
 SKILL_REPO="${SKILL_REPO:-$SKILL_REPO_DEFAULT}"
-SKILL_TARBALL_URL="${SKILL_TARBALL_URL:-https://codeload.github.com/lzhshq/ros2-humble-docker-project-skill-/tar.gz/${SKILL_REF}}"
+SKILL_TARBALL_URL="${SKILL_TARBALL_URL:-https://codeload.github.com/lzhshq/ros2-humble-docker-project-skill/tar.gz/${SKILL_REF}}"
 SKILL_INSTALL_DIR_DEFAULT="${HOME}/.local/share/agent-skills/${SKILL_NAME}"
 SKILL_INSTALL_DIR="${SKILL_INSTALL_DIR:-$SKILL_INSTALL_DIR_DEFAULT}"
 SKILL_FORCE="${SKILL_FORCE:-0}"

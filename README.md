@@ -38,7 +38,7 @@
 让 AI agent（Kiro / Cursor / Claude Code 等）能"看到"这个 skill 并自动触发。**装一次，以后只用对 AI 说话**：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/install.sh | bash
 ```
 
 安装脚本做的事：
@@ -61,7 +61,7 @@ AI 会自动调用 skill 完成模板生成、构建、进容器、编译……�
 **卸载**：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/uninstall.sh | bash
+curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/uninstall.sh | bash
 ```
 
 <details>
@@ -70,15 +70,15 @@ curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-s
 ```bash
 # 改安装路径
 SKILL_INSTALL_DIR=$HOME/dev/skills/ros2-humble-docker-project \
-    bash <(curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh)
+    bash <(curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/install.sh)
 
 # 只装到指定 agent
 SKILL_TARGET_DIRS="$HOME/.cursor/skills" \
-    bash <(curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh)
+    bash <(curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/install.sh)
 
 # 强制重装
 SKILL_FORCE=1 \
-    bash <(curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh)
+    bash <(curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill/main/install.sh)
 ```
 
 </details>
