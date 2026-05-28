@@ -126,6 +126,8 @@ ros2-humble-docker-project/
 ├── SKILL.md                          # 本文件
 ├── README.md                         # 仓库说明
 ├── LICENSE
+├── install.sh                        # 一键安装（curl | bash）
+├── uninstall.sh                      # 一键卸载
 ├── scripts/
 │   └── init_ros2_humble_docker.sh    # 主入口脚本
 ├── references/

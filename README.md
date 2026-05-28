@@ -33,11 +33,59 @@
 
 ---
 
-## 快速开始
+## 一键安装（推荐）
+
+让 AI agent（Kiro / Cursor / Claude Code 等）能"看到"这个 skill 并自动触发：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh | bash
+```
+
+安装脚本会：
+
+1. clone 仓库到 `~/.local/share/agent-skills/ros2-humble-docker-project`
+2. **自动探测**已有的 agent skill 目录（`~/.kiro/skills`、`~/.cursor/skills`、`~/.claude/skills`、`~/.config/claude/skills`），把 skill **软链**进去
+3. 如果都不存在，默认创建 `~/.kiro/skills`
+4. 幂等：重复执行只会 `git pull` 更新，不会破坏已有链接
+
+安装完后，你可以**完全不碰命令行**，直接对 AI 说：
+
+> "在当前目录加 ROS2 Humble 的 Docker 环境"
+> "帮我新建一个叫 `my_robot` 的 ROS2 项目"
+
+AI 会自动调用本 skill 的 `init_ros2_humble_docker.sh` 完成模板生成。
+
+**自定义安装位置**（可选）：
+
+```bash
+# 改安装路径
+SKILL_INSTALL_DIR=$HOME/dev/skills/ros2-humble-docker-project \
+    bash <(curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh)
+
+# 只装到指定 agent
+SKILL_TARGET_DIRS="$HOME/.cursor/skills" \
+    bash <(curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh)
+
+# 强制重装（删除现有安装目录）
+SKILL_FORCE=1 \
+    bash <(curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/install.sh)
+```
+
+**卸载**：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/lzhshq/ros2-humble-docker-project-skill-/main/uninstall.sh | bash
+```
+
+---
+
+## 快速开始（手动方式 / CI 用）
+
+如果你不用 AI agent，或者要在 CI / Dockerfile 里集成，可以走纯 CLI：
 
 ```bash
 # 1. clone skill
-git clone git@github.com:lzhshq/ros2-humble-docker-project-skill-.git ~/ros2-humble-docker-project
+git clone https://github.com/lzhshq/ros2-humble-docker-project-skill-.git ~/ros2-humble-docker-project
 chmod +x ~/ros2-humble-docker-project/scripts/init_ros2_humble_docker.sh
 
 # 2. 准备 Docker 权限（首次配机器才需要，已配好可跳过）
@@ -83,6 +131,8 @@ ros2-humble-docker-project/
 ├── SKILL.md                          # Skill 元信息
 ├── README.md                         # 本文件
 ├── LICENSE                           # MIT
+├── install.sh                        # 一键安装（curl | bash）
+├── uninstall.sh                      # 一键卸载
 ├── scripts/
 │   └── init_ros2_humble_docker.sh    # 主入口脚本
 ├── references/
