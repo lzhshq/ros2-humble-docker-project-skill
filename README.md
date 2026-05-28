@@ -26,10 +26,10 @@
 
 | 模式 | 用法 | 适用 |
 |---|---|---|
-| **`new`** | `bash init_ros2_humble_docker.sh new <name>` | 全新项目 |
-| **`attach`** | `cd <existing_project> && bash init_ros2_humble_docker.sh attach` | 已有源码、想加 Docker 化开发环境 |
+| **`new`** | `bash scripts/init_ros2_humble_docker.sh new <name>` | 全新项目 |
+| **`attach`** | `cd <existing_project> && bash scripts/init_ros2_humble_docker.sh attach` | 已有源码、想加 Docker 化开发环境 |
 
-`attach` 模式的核心承诺：**绝不破坏用户已有内容**。详细行为表见 [USAGE.md §7](./USAGE.md#7-attach-模式详解)。
+`attach` 模式的核心承诺：**绝不破坏用户已有内容**。详细行为表见 [references/USAGE.md §7](./references/USAGE.md#7-attach-模式详解)。
 
 ---
 
@@ -38,7 +38,7 @@
 ```bash
 # 1. clone skill
 git clone git@github.com:lzhshq/ros2-humble-docker-project-skill-.git ~/ros2-humble-docker-project
-chmod +x ~/ros2-humble-docker-project/init_ros2_humble_docker.sh
+chmod +x ~/ros2-humble-docker-project/scripts/init_ros2_humble_docker.sh
 
 # 2. 准备 Docker 权限（首次配机器才需要，已配好可跳过）
 sudo usermod -aG docker $USER
@@ -46,9 +46,9 @@ newgrp docker          # 当前 shell 立即生效
 
 # 3. 接入已有项目（或新建）
 cd ~/my_robot_project
-bash ~/ros2-humble-docker-project/init_ros2_humble_docker.sh attach
+bash ~/ros2-humble-docker-project/scripts/init_ros2_humble_docker.sh attach
 # 或全新：
-# bash ~/ros2-humble-docker-project/init_ros2_humble_docker.sh new my_robot_project
+# bash ~/ros2-humble-docker-project/scripts/init_ros2_humble_docker.sh new my_robot_project
 
 # 4. 构建并进入容器
 ./scripts/build.sh         # 首次较慢（拉镜像 + 装 ROS2 包，约 5–15 分钟）
@@ -62,7 +62,7 @@ source install/setup.bash
 ros2 pkg list
 ```
 
-详细使用说明、故障排查 12 例、维护与迁移见 **[USAGE.md](./USAGE.md)**。
+详细使用说明、故障排查 12 例、维护与迁移见 **[references/USAGE.md](./references/USAGE.md)**。
 
 ---
 
@@ -71,8 +71,8 @@ ros2 pkg list
 | 文件 | 用途 |
 |---|---|
 | [`SKILL.md`](./SKILL.md) | Claude Skill 元信息 + 调用流程 |
-| [`USAGE.md`](./USAGE.md) | 完整使用手册（**首选阅读**，994 行 / 16 章 + 2 附录） |
-| `templates/README_DOCKER.md` | 每个生成的项目里都会有一份的中文项目级说明（17 节） |
+| [`references/USAGE.md`](./references/USAGE.md) | 完整使用手册（**首选阅读**，16 章） |
+| `assets/templates/README_DOCKER.md` | 每个生成的项目里都会有一份的中文项目级说明（17 节） |
 
 ---
 
@@ -81,16 +81,21 @@ ros2 pkg list
 ```
 ros2-humble-docker-project/
 ├── SKILL.md                          # Skill 元信息
-├── USAGE.md                          # 完整使用手册
 ├── README.md                         # 本文件
 ├── LICENSE                           # MIT
-├── init_ros2_humble_docker.sh        # 主入口脚本
-└── templates/
-    ├── docker/{Dockerfile, compose.yaml, entrypoint.sh}
-    ├── scripts/{build, run, enter, stop, clean_ws}.sh
-    ├── README_DOCKER.md
-    ├── env.template
-    └── gitignore.template
+├── scripts/
+│   └── init_ros2_humble_docker.sh    # 主入口脚本
+├── references/
+│   └── USAGE.md                      # 完整使用手册
+├── assets/
+│   └── templates/
+│       ├── docker/{Dockerfile, compose.yaml, entrypoint.sh}
+│       ├── scripts/{build, run, enter, stop, clean_ws}.sh
+│       ├── README_DOCKER.md
+│       ├── env.template
+│       └── gitignore.template
+└── evals/
+    └── evals.json                    # 触发测试用例
 ```
 
 ---
@@ -114,7 +119,7 @@ ros2-humble-docker-project/
 - 不替你装 GPU 驱动 / `nvidia-container-toolkit`
 - 不替你拉起 SocketCAN 接口（内核操作必须在宿主跑）
 
-扩展方向（GPU / 非 root 用户 / Gazebo / VS Code devcontainer / CI 离线镜像 等）见 [USAGE.md §16](./USAGE.md#16-扩展方向)。
+扩展方向（GPU / 非 root 用户 / Gazebo / VS Code devcontainer / CI 离线镜像 等）见 [references/USAGE.md §16](./references/USAGE.md#16-扩展方向)。
 
 ---
 

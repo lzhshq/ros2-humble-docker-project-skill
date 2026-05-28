@@ -1,0 +1,82 @@
+[
+  {
+    "query": "我在 Ubuntu 24.04 上想搞 ROS2 Humble 开发，但是 apt 装不上 ros-humble-desktop，有什么办法？最好能长期用，不是临时跑一下就行的那种。",
+    "should_trigger": true
+  },
+  {
+    "query": "我有一个已有的 ROS2 项目在 ~/catbot_ws，里面有 src/ 目录放着几个 package。我想给它加上 Docker 环境，要能用 rviz2 看模型、还要能访问 USB 串口设备。帮我搞一下。",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我创建一个 Docker 化的 ROS2 Humble 开发模板，要求：colcon 工作区 bind mount、支持 CAN 总线设备直通、GUI 能跑 rqt，项目名叫 agv_controller。",
+    "should_trigger": true
+  },
+  {
+    "query": "我们实验室新来了几台 Ubuntu 24.04 的工控机，要跑 ROS2 Humble 做 AMR 导航。之前在 22.04 上直接装的，现在 24.04 装不了了。有没有什么方案能让大家统一开发环境？要能接 USB 激光雷达和 CAN 底盘。",
+    "should_trigger": true
+  },
+  {
+    "query": "i need a ros2 humble container setup that persists across reboots, mounts my workspace so i dont have to rebuild the image every time i change code, and lets me run rviz2 with gui. host is ubuntu 24.04 noble.",
+    "should_trigger": true
+  },
+  {
+    "query": "我现在有个项目 ~/arm_control，里面就一个 src/arm_driver 包。想用 docker 把 humble 环境包起来，但是不能动我现有的代码结构。compose 要能直接 docker compose up。",
+    "should_trigger": true
+  },
+  {
+    "query": "想给我的机器人项目加个 docker 开发环境，需要 host network 让 DDS 能发现其他节点，还要把 /dev/ttyUSB0 映射进去。项目名 mobile_base，ROS2 Humble。",
+    "should_trigger": true
+  },
+  {
+    "query": "公司要求所有 ROS2 项目都容器化部署，我需要一个标准的项目模板：Dockerfile + compose + 管理脚本，基于 humble-desktop 镜像，要支持 GUI 调试工具。",
+    "should_trigger": true
+  },
+  {
+    "query": "我的 24.04 笔记本上想跑 ROS2 Humble 仿真，需要 docker 环境能显示 gazebo 和 rviz 的窗口。有现成的模板吗？",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我写一个 ROS2 Humble 的 launch file，启动一个 lidar_node 和一个 slam_toolbox 节点，参数从 yaml 读取。",
+    "should_trigger": false
+  },
+  {
+    "query": "我的 docker compose 文件里 volumes 挂载报错 permission denied，怎么解决？用的是 ros2 humble 镜像。",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我把这个 ROS2 包从 Foxy 迁移到 Humble，主要是 CMakeLists.txt 和 package.xml 的改动，还有一些 API 变化。",
+    "should_trigger": false
+  },
+  {
+    "query": "我想在 Ubuntu 22.04 上直接 apt 安装 ROS2 Humble，能给我完整的安装步骤吗？不用 docker。",
+    "should_trigger": false
+  },
+  {
+    "query": "ros2 topic echo /cmd_vel 没有输出，但是 ros2 topic list 能看到这个 topic。我用的是 docker 容器，ROS_DOMAIN_ID 设的 0。帮我排查一下。",
+    "should_trigger": false
+  },
+  {
+    "query": "我需要一个 Dockerfile 来部署我的 ROS2 Humble 节点到生产环境（Kubernetes），要求多阶段构建、最小镜像体积、非 root 用户运行。不需要 GUI 和设备映射。",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我配置 VS Code 的 devcontainer.json，让它能连接到我已有的 ROS2 Humble docker 容器，要支持 IntelliSense 和调试。",
+    "should_trigger": false
+  },
+  {
+    "query": "我的 colcon build 报错 CMake Error: could not find package ament_cmake，容器里跑的 humble。是不是 source 的问题？",
+    "should_trigger": false
+  },
+  {
+    "query": "想在 docker 里跑 ROS2 Iron（不是 Humble），需要 GPU 加速跑 Isaac Sim。有推荐的 compose 配置吗？",
+    "should_trigger": false
+  },
+  {
+    "query": "我有一个跑在 docker 里的 ROS2 Humble 环境，现在想加一个 SocketCAN 接口 can0 进去。宿主机是 Ubuntu 24.04，CAN 适配器是 PEAK PCAN-USB。具体怎么操作？",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我写一个 ros2 的 python 节点，订阅 /camera/image_raw 然后用 OpenCV 做边缘检测，发布到 /camera/edges。",
+    "should_trigger": false
+  }
+]

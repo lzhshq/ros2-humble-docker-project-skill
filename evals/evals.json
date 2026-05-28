@@ -1,0 +1,23 @@
+{
+  "skill_name": "ros2-humble-docker-project",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我在 Ubuntu 24.04 上想搞 ROS2 Humble 开发，但是 apt 装不上 ros-humble-desktop，有什么办法？最好能长期用，不是临时跑一下就行的那种。",
+      "expected_output": "应调用 ros2-humble-docker-project skill，执行 init_ros2_humble_docker.sh new 模式创建项目",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "我有一个已有的 ROS2 项目在 ~/catbot_ws，里面有 src/ 目录放着几个 package。我想给它加上 Docker 环境，要能用 rviz2 看模型、还要能访问 USB 串口设备。帮我搞一下。",
+      "expected_output": "应调用 ros2-humble-docker-project skill，执行 init_ros2_humble_docker.sh attach 模式接入已有项目",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "帮我创建一个 Docker 化的 ROS2 Humble 开发模板，要求：colcon 工作区 bind mount、支持 CAN 总线设备直通、GUI 能跑 rqt，项目名叫 agv_controller。",
+      "expected_output": "应调用 ros2-humble-docker-project skill，执行 init_ros2_humble_docker.sh new agv_controller",
+      "files": []
+    }
+  ]
+}

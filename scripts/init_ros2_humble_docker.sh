@@ -11,7 +11,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-TEMPLATES_DIR="${SCRIPT_DIR}/templates"
+TEMPLATES_DIR="${SCRIPT_DIR}/../assets/templates"
 
 # ---------- 颜色日志 ----------
 if [ -t 1 ]; then
@@ -134,16 +134,9 @@ install_docker_dir() {
     copy_template "docker/entrypoint.sh" "${target}/docker/entrypoint.sh"
 
     if [ -n "$extra_volume" ]; then
-        # 用 awk 替换占位行（避免 sed 在多行内容时的转义麻烦）
-        local tmp
-        tmp="$(mktemp)"
-        awk -v repl="$extra_volume" '
-            { if ($0 ~ /^[[:space:]]*#[[:space:]]*\{\{EXTRA_VOLUMES\}\}/) print repl; else print $0 }
-        ' "${target}/docker/compose.yaml" > "$tmp"
-        mv "$tmp" "${target}/docker/compose.yaml"
+        sed -i "s|^.*__EXTRA_VOLUMES__.*$|${extra_volume}|" "${target}/docker/compose.yaml"
     else
-        # 删除占位行
-        sed -i '/{{EXTRA_VOLUMES}}/d' "${target}/docker/compose.yaml"
+        sed -i '/__EXTRA_VOLUMES__/d' "${target}/docker/compose.yaml"
     fi
 
     chmod +x "${target}/docker/entrypoint.sh"

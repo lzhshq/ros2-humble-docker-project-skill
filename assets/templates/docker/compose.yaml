@@ -52,7 +52,7 @@ services:
       - ../ros2_ws:/workspace/ros2_ws
       # 数据目录
       - ../data:/workspace/data
-      # {{EXTRA_VOLUMES}}
+      # __EXTRA_VOLUMES__
 
     # 设备组（host network + privileged 时通常已足够，这里是兜底）
     group_add:
