@@ -3,10 +3,10 @@
 [![Skill Format](https://img.shields.io/badge/format-Claude%20Skill-blue)](#)
 [![ROS 2](https://img.shields.io/badge/ROS%202-Humble-22314e)](https://docs.ros.org/en/humble/)
 [![Base Image](https://img.shields.io/badge/base-osrf%2Fros%3Ahumble--desktop-2496ed)](https://hub.docker.com/r/osrf/ros)
-[![Host OS](https://img.shields.io/badge/host-Ubuntu%2024.04%20%2F%2022.04-orange)](#)
+[![Host OS](https://img.shields.io/badge/host-any%20Docker%20host-orange)](#)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](./LICENSE)
 
-> One-shot **Claude skill** that scaffolds or attaches a **Docker-based ROS 2 Humble** development environment for **long-term** robotics projects on hosts that can't (or shouldn't) install Humble natively — typically Ubuntu 24.04.
+> One-shot **Claude skill** that scaffolds or attaches a **Docker-based ROS 2 Humble** development environment for **long-term** robotics projects on any host that has Docker — Linux (Ubuntu, Fedora, Arch…), macOS, or Windows/WSL2.
 
 ---
 

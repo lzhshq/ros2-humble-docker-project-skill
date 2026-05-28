@@ -42,7 +42,8 @@ services:
       - LC_ALL=en_US.UTF-8
 
     volumes:
-      # X11 socket，rviz2 / rqt GUI 需要
+      # X11 socket — Linux X11/XWayland 开箱即用；macOS 需 XQuartz；WSL2 需 WSLg
+      # 非 Linux 宿主若无 /tmp/.X11-unix 可注释掉此行（放弃 GUI）
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       # USB / 串口 / CAN / 摄像头：直接挂 /dev 最省事
       - /dev:/dev
